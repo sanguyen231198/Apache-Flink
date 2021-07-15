@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flink-taskmanager
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9999"
+spec:
+  type: ClusterIP
+  ports:
+  - name: rpc
+    port: 6123
+  - name: blob-server
+    port: 6124
+  - name: webui
+    port: 8081
+  - name: metrics
+    port: 9999    
+  selector:
+    app: flink
+    component: taskmanager
